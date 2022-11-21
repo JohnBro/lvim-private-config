@@ -314,7 +314,9 @@ lvim.plugins = {
 	},
 }
 
-vim.api.nvim_create_augroup("indentGroup")
+vim.api.nvim_create_augroup("indentGroup", {
+  clear = true
+})
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 vim.api.nvim_create_autocmd("BufEnter", {
