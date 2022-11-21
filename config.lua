@@ -4,7 +4,7 @@
 ]]
 
 -- Enable powershell as your default shell
-if (vim.fn.has("win32") == true or vim.fn.has("win64") == true)
+if (vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1)
 then
     vim.opt.shell = "pwsh.exe -NoLogo"
     vim.opt.shellcmdflag =
@@ -43,7 +43,7 @@ vim.opt.cursorcolumn = true
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = false
 lvim.colorscheme = "lunar"
-if (vim.fn.has('gui_running') ~= true)
+if (vim.fn.has('gui_running') ~= 1)
 then
     -- to disable icons and use a minimalist setup, uncomment the following
     lvim.use_icons = false
@@ -51,55 +51,78 @@ end
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
--- add your own keymapping
+-- add your own keymapping, TODO: use table to set
+-- normal mode
+lvim.keys.normal_mode["H"]     = "0"
+lvim.keys.normal_mode["L"]     = "$"
+lvim.keys.normal_mode["n"]     = "nzz"
+lvim.keys.normal_mode["N"]     = "Nzz"
+lvim.keys.normal_mode["G"]     = "Gzz"
+lvim.keys.normal_mode["{"]     = "{zz"
+lvim.keys.normal_mode["}"]     = "}zz"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["<C-n>"] = false
-lvim.keys.normal_mode["<C-j>"] = false
-lvim.keys.normal_mode["<C-k>"] = false
-lvim.keys.normal_mode["<C-l>"] = false
+lvim.keys.normal_mode["<C-h>"] = "<C-w>h"
+lvim.keys.normal_mode["<C-j>"] = "<C-w>j"
+lvim.keys.normal_mode["<C-k>"] = "<C-w>k"
+lvim.keys.normal_mode["<C-l>"] = "<C-w>l"
 lvim.keys.normal_mode["<C-n>"] = ":nohl<cr>"
+lvim.keys.normal_mode["<C-u>"] = "<Esc>viwU<Esc>"
+lvim.keys.normal_mode["<Tab>"] = ":tabnext<cr>"
 
-lvim.keys.insert_mode["jk"] = "<Esc>"
--- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
--- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+-- insert mode
+lvim.keys.insert_mode["jk"]    = "<Esc>"
+lvim.keys.insert_mode["<C-h>"] = "<C-w>h"
+lvim.keys.insert_mode["<C-l>"] = "<C-w>l"
+lvim.keys.insert_mode["<C-j>"] = "<C-w>j"
+lvim.keys.insert_mode["<C-k>"] = "<C-w>k"
+
+if (vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1)
+then
+    lvim.keys.normal_mode["<C-v>"] = "<Esc>+gP"
+    lvim.keys.normal_mode["<M-j>"] = ":resize +5<cr>"
+    lvim.keys.normal_mode["<M-k>"] = ":resize -5<cr>"
+    lvim.keys.normal_mode["<M-h>"] = ":vertical resize -5<cr>"
+    lvim.keys.normal_mode["<M-l>"] = ":vertical resize +5<cr>"
+elseif (vim.fn.has("macunix") == 1)
+then
+    lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
+    lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+end
 -- unmap a default keymapping
--- vim.keymap.del("n", "<C-Up>")
+vim.keymap.del("n", "<C-Up>")
+
 -- override a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
--- local _, actions = pcall(require, "telescope.actions")
--- lvim.builtin.telescope.defaults.mappings = {
---   -- for input mode
---   i = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---     ["<C-n>"] = actions.cycle_history_next,
---     ["<C-p>"] = actions.cycle_history_prev,
---   },
---   -- for normal mode
---   n = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---   },
--- }
-
--- Change theme settings
--- lvim.builtin.theme.options.dim_inactive = true
--- lvim.builtin.theme.options.style = "storm"
+local _, actions = pcall(require, "telescope.actions")
+lvim.builtin.telescope.defaults.mappings = {
+    -- for input mode
+    i = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-n>"] = actions.cycle_history_next,
+        ["<C-p>"] = actions.cycle_history_prev,
+    },
+    -- for normal mode
+    n = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+    },
+}
 
 -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
--- }
+lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+}
 lvim.builtin.which_key.mappings["c"] = {}
 lvim.builtin.which_key.mappings["f"] = {
     f = { "<cmd>Telescope find_files<cr>", "Find Files"},
@@ -115,10 +138,10 @@ lvim.builtin.which_key.mappings["bd"] = {
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 
-if (vim.fn.has('win32') or vim.fn.has('win64'))
+if (vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1)
 then
   lvim.builtin.terminal.active = false
-  -- lvim.builtin.terminal.shell = "pwsh.exe -NoLogo"
+  lvim.builtin.terminal.shell = "pwsh.exe -NoLogo"
 
   -- nvim-tree has some performance issues on windows, see kyazdani42/nvim-tree.lua#549
   lvim.builtin.nvimtree.setup.diagnostics.enable = nil
@@ -136,7 +159,7 @@ end
 
 
 -- if you don't want all the parsers change this to a table of the ones you want
-if (vim.fn.has('win32') or vim.fn.has('win64'))
+if (vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1)
 then
   lvim.builtin.treesitter.ensure_installed = {
     "c",
@@ -232,22 +255,23 @@ lvim.builtin.treesitter.highlight.enable = true
 -- }
 
 -- Additional Plugins
--- lvim.plugins = {
---     {
---       "folke/trouble.nvim",
---       cmd = "TroubleToggle",
---     },
--- }
+lvim.plugins = {
+    {
+        "folke/trouble.nvim",
+        cmd = "TroubleToggle",
+    },
+}
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- vim.api.nvim_create_autocmd("BufEnter", {
---   pattern = { "*.json", "*.jsonc" },
---   -- enable wrap mode for json files only
---   command = "setlocal wrap",
--- })
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "zsh",
---   callback = function()
---     -- let treesitter use bash highlight for zsh files as well
---     require("nvim-treesitter.highlight").attach(0, "bash")
---   end,
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*.json", "*.jsonc" },
+  -- enable wrap mode for json files only
+  command = "setlocal wrap",
+})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "zsh",
+  callback = function()
+    -- let treesitter use bash highlight for zsh files as well
+    require("nvim-treesitter.highlight").attach(0, "bash")
+  end,
+})
