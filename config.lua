@@ -178,11 +178,11 @@ lvim.builtin.treesitter.highlight.enable = true
 
 -- generic LSP settings
 
--- -- make sure server will always be installed even if the server is in skipped_servers list
--- lvim.lsp.installer.setup.ensure_installed = {
---     "sumneko_lua",
---     "jsonls",
--- }
+-- make sure server will always be installed even if the server is in skipped_servers list
+lvim.lsp.installer.setup.ensure_installed = {
+    "sumneko_lua",
+    "jsonls",
+}
 -- -- change UI setting of `LspInstallInfo`
 -- -- see <https://github.com/williamboman/nvim-lsp-installer#default-configuration>
 -- lvim.lsp.installer.setup.ui.check_outdated_servers_on_open = false
@@ -314,36 +314,10 @@ lvim.plugins = {
 	},
 }
 
-vim.api.nvim_create_augroup("indentGroup", {
-  clear = true
-})
-
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = { "*.json", "*.jsonc" },
-	group   = "indentGroup",
-	-- enable wrap mode for json files only
-	command = "setlocal wrap",
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = { "*.lua" },
-	group   = "indentGroup",
-	command = "setlocal nowrap tabstop=2 shiftwidth=2 noexpandtab",
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = { "*.c", "*.cpp", "*.h", "*.py", "*.php" },
-	group   = "indentGroup",
-	command = "setlocal nowrap tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=120"
-})
-
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = { "*.txt", "*.log", "*.mk", "*.cmake", "Makefile", "makefile" },
-	group   = "indentGroup",
 	command = "setlocal nowrap tabstop=4 shiftwidth=4 noexpandtab"
 })
-
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "zsh",
