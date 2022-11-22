@@ -42,47 +42,6 @@ M.config = function()
 	vim.wo.foldnestmax = 3
 	vim.wo.foldminlines = 1
 	lvim.builtin.treesitter.matchup.enable = true
-	lvim.builtin.treesitter.textobjects.select = {
-		enable = true,
-		lookahead = true,
-		keymaps = {
-			["ac"] = "@class.outer",
-			["ic"] = "@class.inner",
-			["af"] = "@function.outer",
-			["if"] = "@function.inner",
-			["aa"] = "@parameter.outer",
-			["ia"] = "@parameter.inner",
-		},
-	}
-	lvim.builtin.treesitter.textobjects.move = {
-		enable = true,
-		set_jumps = true, -- whether to set jumps in the jumplist
-		goto_next_start = {
-			["]f"] = "@function.outer",
-			["]]"] = "@class.outer",
-		},
-		goto_next_end = {
-			["]F"] = "@function.outer",
-			["]["] = "@class.outer",
-		},
-		goto_previous_start = {
-			["[f"] = "@function.outer",
-			["[["] = "@class.outer",
-		},
-		goto_previous_end = {
-			["[F"] = "@function.outer",
-			["[]"] = "@class.outer",
-		},
-	}
-	lvim.builtin.treesitter.textobjects.swap = {
-		enable = true,
-		swap_next = {
-			["<M-a>"] = "@parameter.inner",
-		},
-		swap_previous = {
-			["<M-A>"] = "@parameter.inner",
-		},
-	}
 	lvim.builtin.treesitter.ignore_install = { "haskell" }
 	lvim.builtin.treesitter.autotag.enable = true
 	lvim.builtin.treesitter.rainbow.enable = true
@@ -91,6 +50,18 @@ M.config = function()
 	else
 		lvim.builtin.treesitter.ensure_installed = unix_treesitter_lang
 	end
+
+	require'nvim-treesitter.configs'.setup {
+		incremental_selection = {
+			enable = true,
+			keymaps = {
+				init_selection = "<CR>",
+				node_incremental = "<CR>",
+				node_decremental = "<BS>",
+				scope_incremental = "<TAB>",
+			},
+		},
+	}
 end
 
 return M

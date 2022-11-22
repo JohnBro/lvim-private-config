@@ -2,12 +2,27 @@ local M = {}
 
 M.config = function()
 	lvim.plugins = {
-		{
-			"folke/trouble.nvim",
-			cmd = "TroubleToggle",
-		},
+		----------------
+		-- Treesitter --
+		----------------
 		{
 			"p00f/nvim-ts-rainbow",
+		},
+		{
+			"windwp/nvim-ts-autotag",
+			config = function()
+				require("nvim-ts-autotag").setup()
+			end,
+		},
+		------------------------
+		-- Navigation plugins --
+		------------------------
+		{
+			"andymass/vim-matchup",
+			event = "CursorMoved",
+			config = function()
+				vim.g.matchup_matchparen_offscreen = { method = "popup" }
+			end,
 		},
 		{
 			"karb94/neoscroll.nvim",
@@ -37,31 +52,13 @@ M.config = function()
 				vim.g.rnvimr_bw_enable = 1
 			end,
 		},
+		---------------------
+		-- LSP Enhancement --
+		---------------------
 		{
-			"folke/todo-comments.nvim",
-			event = "BufRead",
-			config = function()
-				require("todo-comments").setup()
-			end,
+			"folke/trouble.nvim",
+			cmd = "TroubleToggle",
 		},
-		{
-			"itchyny/vim-cursorword",
-			event = {"BufEnter", "BufNewFile"},
-			config = function()
-				vim.api.nvim_command("augroup user_plugin_cursorword")
-				vim.api.nvim_command("autocmd!")
-				vim.api.nvim_command("autocmd FileType NvimTree,lspsagafinder,dashboard,vista let b:cursorword = 0")
-				vim.api.nvim_command("autocmd WinEnter * if &diff || &pvw | let b:cursorword = 0 | endif")
-				vim.api.nvim_command("autocmd InsertEnter * let b:cursorword = 0")
-				vim.api.nvim_command("autocmd InsertLeave * let b:cursorword = 1")
-				vim.api.nvim_command("augroup END")
-			end
-		},
-		{
-			"sindrets/diffview.nvim",
-			event = "BufRead",
-		},
-		-- Lsp Enhancement
 		{
 			"ahmedkhalf/lsp-rooter.nvim",
 			event = "BufRead",
@@ -104,6 +101,36 @@ M.config = function()
 			config = function()
 				require('symbols-outline').setup()
 			end
+		},
+		--------------
+		-- Genernal --
+		--------------
+		{
+			"folke/todo-comments.nvim",
+			event = "BufRead",
+			config = function()
+				require("todo-comments").setup()
+			end,
+		},
+		{
+			"itchyny/vim-cursorword",
+			event = {"BufEnter", "BufNewFile"},
+			config = function()
+				vim.api.nvim_command("augroup user_plugin_cursorword")
+				vim.api.nvim_command("autocmd!")
+				vim.api.nvim_command("autocmd FileType NvimTree,lspsagafinder,dashboard,vista let b:cursorword = 0")
+				vim.api.nvim_command("autocmd WinEnter * if &diff || &pvw | let b:cursorword = 0 | endif")
+				vim.api.nvim_command("autocmd InsertEnter * let b:cursorword = 0")
+				vim.api.nvim_command("autocmd InsertLeave * let b:cursorword = 1")
+				vim.api.nvim_command("augroup END")
+			end
+		},
+		---------
+		-- Git --
+		---------
+		{
+			"sindrets/diffview.nvim",
+			event = "BufRead",
 		},
 	}
 end
