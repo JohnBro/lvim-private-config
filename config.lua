@@ -183,23 +183,13 @@ lvim.lsp.installer.setup.ensure_installed = {
     "sumneko_lua",
     "jsonls",
 }
--- -- change UI setting of `LspInstallInfo`
--- -- see <https://github.com/williamboman/nvim-lsp-installer#default-configuration>
--- lvim.lsp.installer.setup.ui.check_outdated_servers_on_open = false
--- lvim.lsp.installer.setup.ui.border = "rounded"
--- lvim.lsp.installer.setup.ui.keymaps = {
---     uninstall_server = "d",
---     toggle_server_expand = "o",
--- }
+-- change UI setting of `LspInstallInfo`
+---@usage disable automatic installation of servers
+lvim.lsp.installer.setup.automatic_installation = false
 
--- ---@usage disable automatic installation of servers
--- lvim.lsp.installer.setup.automatic_installation = false
-
--- ---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
--- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
--- local opts = {} -- check the lspconfig documentation for a list of all possible options
--- require("lvim.lsp.manager").setup("pyright", opts)
+---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
+---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 
 -- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
 -- ---`:LvimInfo` lists which server(s) are skipped for the current filetype
@@ -341,7 +331,20 @@ lvim.plugins = {
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "BufRead",
-		config = function() require"lsp_signature".on_attach() end,
+		config = function()
+			require"lsp_signature".setup({
+				doc_lines = 10,
+				floating_window = true,
+				floating_window_above_cur_line = false,
+				extra_trigger_chars = { "(", "," }, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
+			})
+		end,
+	},
+	{
+		"simrat39/symbols-outline.nvim",
+		config = function()
+			require('symbols-outline').setup()
+		end
 	},
 }
 
