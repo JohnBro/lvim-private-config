@@ -35,7 +35,7 @@ M.config = function()
 		let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 		set shellquote= shellxquote=
 		]]
-		vim.opt.guifont = "Courier New:h14" -- the font used in graphical neovim applications
+		vim.opt.guifont = "Courier New:h13" -- the font used in graphical neovim applications
 		-- Set a compatible clipboard manager
 		vim.g.clipboard = {
 			copy = {
@@ -86,12 +86,45 @@ M.config = function()
 		"hiddenoff",
 		"algorithm:minimal",
 	}
+	if vim.fn.has("nvim-0.7") ~= 0 then
+		vim.opt.fillchars = {
+			fold = " ",
+			eob = " ", -- suppress ~ at EndOfBuffer
+			diff = "╱", -- alternatives = ⣿ ░ ─
+			msgsep = "‾",
+			foldopen = "▾",
+			foldsep = "│",
+			foldclose = "▸",
+			horiz = "━",
+			horizup = "┻",
+			horizdown = "┳",
+			vert = "┃",
+			vertleft = "┫",
+			vertright = "┣",
+			verthoriz = "╋",
+		}
+	else
+		vim.opt.fillchars = {
+			vert = "▕", -- alternatives │
+			fold = " ",
+			eob = " ", -- suppress ~ at EndOfBuffer
+			diff = "╱", -- alternatives = ⣿ ░ ─
+			msgsep = "‾",
+			foldopen = "▾",
+			foldsep = "│",
+			foldclose = "▸",
+		}
+	end
 	vim.opt.guicursor = "n:block-blinkon10,i-ci:ver15-blinkon10,c:hor15-blinkon10,v-sm:block,ve:ver15,r-cr-o:hor10"
 	-- vim.opt.pumblend = 10
 	vim.opt.number = true
 	vim.opt.relativenumber = true
+	vim.opt.spell = false
+	vim.opt.spelllang = "en"
 	vim.opt.timeoutlen = 250
-	vim.opt.updatetime = 250
+	vim.opt.updatetime = 300 -- faster completion
+	vim.opt.undodir = vim.fn.stdpath "cache" .. "/undo"
+	vim.opt.undofile = true -- enable persistent undo
 	vim.opt.wildignorecase = true
 	vim.opt.wildignore = {
 		"*.aux,*.out,*.toc",
