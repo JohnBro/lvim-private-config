@@ -3,7 +3,6 @@ local M = {}
 local wins_treesitter_lang = {
 	"c",
 	"lua",
-	"python",
 }
 
 local unix_treesitter_lang = {
@@ -45,6 +44,7 @@ M.config = function()
 	lvim.builtin.treesitter.ignore_install = { "haskell" }
 	lvim.builtin.treesitter.autotag.enable = true
 	lvim.builtin.treesitter.rainbow.enable = true
+	lvim.builtin.treesitter.highlight.enable = true
 	if vim.fn.has("win32") == 1 or vim.fn.has("win64") then
 		lvim.builtin.treesitter.ensure_installed = wins_treesitter_lang
 	else
