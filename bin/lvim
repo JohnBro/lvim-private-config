@@ -1,5 +1,4 @@
-#!/bin/bash
-# used for neovide, copy to /usr/local/bin/nvim
+#!/usr/bin/env bash
 if [[ -s "$LUNARVIM_RUNTIME_DIR" ]]; then
   exec /bin/nvim "$@"
 elif [[ -r ~/.local/share/lunarvim/lvim/init.lua ]]; then

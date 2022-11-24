@@ -5,11 +5,11 @@ M.config = function()
 	lvim.lsp.installer.setup.ensure_installed = {
 		"sumneko_lua",
 		"jsonls",
+		"pylsp",
 	}
 
 	--- WARN: configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 	--- see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
-	vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
 	vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 
 	lvim.lsp.installer.setup.automatic_installation = false
