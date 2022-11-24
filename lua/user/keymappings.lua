@@ -66,7 +66,7 @@ local function basic_mappings()
 	---------------
 	-- Unmap key --
 	---------------
-	unmap("n", "<C-Up>")
+	-- unmap("n", "<C-Up>")
 end
 
 local function whichkey_mappings()
