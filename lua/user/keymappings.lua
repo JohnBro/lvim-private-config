@@ -55,7 +55,6 @@ local function basic_mappings()
 	-- File Operations --
 	---------------------
 	map("n", "<C-s>", ":w<cr>", { silent = false })
-	map("n", "<C-n>", ":nohl<cr>", { silent = false })
 	map("n", "<C-u>", "<Esc>viwU<Esc>", { silent = false })
 	map("n", "<Tab>", ":tabnext<cr>", { silent = false })
 	map("n", "<M-j>", ":resize +5<cr>", { silent = false })
@@ -71,7 +70,15 @@ end
 
 local function whichkey_mappings()
 	lvim.leader = "space"
+	lvim.builtin.which_key.mappings["bd"] = {
+		"<cmd>BufferKill<cr>", "Kill Buffer",
+	}
+	lvim.builtin.which_key.mappings["bb"] = {
+		"<cmd>Telescope buffers<cr>", "Buffers",
+	}
+	lvim.builtin.which_key.mappings["bf"] = {}
 	lvim.builtin.which_key.mappings["c"] = {}
+	lvim.builtin.which_key.mappings["e"] = {}
 	lvim.builtin.which_key.mappings["f"] = {
 		name = "+Find",
 		f = { "<cmd>Telescope find_files<cr>", "Find Files"},
@@ -79,18 +86,11 @@ local function whichkey_mappings()
 		r = { "<cmd>Telescope oldfiles<cr>", "History files" },
 	}
 	lvim.builtin.which_key.mappings["h"] = {}
-	lvim.builtin.which_key.mappings["bd"] = {
-		"<cmd>BufferKill<cr>", "Kill Buffer"
-	}
 	lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 	lvim.builtin.which_key.mappings["t"] = {
-		name = "+Trouble",
-		r = { "<cmd>Trouble lsp_references<cr>", "References" },
-		f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-		d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-		q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-		l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-		w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+		name = "+Toggle",
+		e = { "<CMD>NvimTreeToggle<CR>", "Explorer" },
+		o = { "<CMD>SymbolsOutline<CR>", "SymbolsOutline" }
 	}
 end
 

@@ -2,128 +2,172 @@ local M = {}
 
 M.config = function()
 	lvim.plugins = {
-		----------------
-		-- Treesitter --
-		----------------
-		{
-			"p00f/nvim-ts-rainbow",
-		},
-		{
-			"windwp/nvim-ts-autotag",
-			config = function()
-				require("nvim-ts-autotag").setup()
-			end,
-		},
-		------------------------
-		-- Navigation plugins --
-		------------------------
-		{
-			"andymass/vim-matchup",
-			event = "CursorMoved",
-			config = function()
-				vim.g.matchup_matchparen_offscreen = { method = "popup" }
-			end,
-		},
+		---------------------
+		--- Screen Scroll ---
+		---------------------
 		{
 			"karb94/neoscroll.nvim",
 			event = "WinScrolled",
-			config = function()
-				require('neoscroll').setup({
-					-- All these keys will be mapped to their corresponding default scrolling animation
-					mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
-						'<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
-					hide_cursor = true,          -- Hide cursor while scrolling
-					stop_eof = true,             -- Stop at <EOF> when scrolling downwards
-					use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-					respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-					cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-					easing_function = nil,        -- Default easing function
-					pre_hook = nil,              -- Function to run before the scrolling animation starts
-					post_hook = nil,              -- Function to run after the scrolling animation ends
-				})
-			end
+			config = function() require("user.plugins.neoscroll").config() end,
+		},
+		---------------------
+		--- Cursor Motion ---
+		---------------------
+		{
+			"rhysd/clever-f.vim",
+			keys = { "f", "F", "t", "T" },
+			setup = function() require("user.plugins.clever-f").setup() end,
 		},
 		{
-			"kevinhwang91/rnvimr",
-			cmd = "RnvimrToggle",
-			config = function()
-				vim.g.rnvimr_draw_border = 1
-				vim.g.rnvimr_pick_enable = 1
-				vim.g.rnvimr_bw_enable = 1
-			end,
+			"phaazon/hop.nvim",
+			cmd = "Hop*",
+			config = function() require("user.plugins.hop").config() end,
+		},
+		{
+			"andymass/vim-matchup",
+			event = "CursorMoved",
+			setup = function() require("user.plugins.matchup").setup() end,
+		},
+		--------------------
+		--- Tag Jumpping ---
+		--------------------
+		{
+			"ethanholz/nvim-lastplace",
+			event = "BufRead",
+			config = function() require("user.plugins.lastplace").config() end,
+		},
+		{
+			"MattesGroeger/vim-bookmarks",
+			event = "BufRead",
+			setup = function() require("user.plugins.vim-bookmarks").setup() end,
+			config = function() require("user.plugins.vim-bookmarks").config() end,
+		},
+		{
+			"tom-anders/telescope-vim-bookmarks.nvim",
+			keys = { "ml", "mL" },
+			config = function() require("user.plugins.telescope-vim-bookmarks").config() end,
+		},
+		-----------------
+		--- Grep Text ---
+		-----------------
+		{
+			"bronson/vim-visual-star-search",
+			keys = { { "v", "*" }, { "v", "#" }, { "v", "g*" }, { "v", "g#" } },
+		},
+		{
+			"romainl/vim-cool",
+			event = "CursorMoved",
+		},
+		{
+			"nvim-telescope/telescope-live-grep-args.nvim",
+			keys = { "<C-M-F>" },
+			config = function() require("user.plugins.telescope-live-grep-args").config() end,
+		},
+		{
+			"nacro90/numb.nvim",
+			event = "BufRead",
+			config = function() require("user.plugins.numb").config() end,
+		},
+		------------------
+		--- Quick Edit ---
+		------------------
+		{
+			"mg979/vim-visual-multi",
+			keys = { "<C-n>", { "v", "<C-n>" }, "<C-M-L>", { "v", "<C-M-L>" }, "ma", { "v", "ma" } },
+			setup = function() require("user.plugins.vim-visual-multi").setup() end,
+			config = function() require("user.plugins.vim-visual-multi").config() end,
 		},
 		---------------------
 		-- LSP Enhancement --
 		---------------------
 		{
-			"folke/trouble.nvim",
-			cmd = "TroubleToggle",
-		},
-		{
-			"ahmedkhalf/lsp-rooter.nvim",
+			"j-hui/fidget.nvim",
 			event = "BufRead",
-			config = function()
-				require("lsp-rooter").setup()
-			end,
-		},
-		{
-			"rmagatti/goto-preview",
-			config = function()
-				require('goto-preview').setup {
-					width = 120; -- Width of the floating window
-					height = 25; -- Height of the floating window
-					default_mappings = false; -- Bind default mappings
-					debug = false; -- Print debug information
-					opacity = nil; -- 0-100 opacity level of the floating window where 100 is fully transparent.
-					post_open_hook = nil -- A function taking two arguments, a buffer and a window to be ran as a hook.
-					-- You can use "default_mappings = true" setup option
-					-- Or explicitly set keybindings
-					-- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
-					-- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
-					-- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
-				}
-			end
+			config = function() require("user.plugins.fidget").config() end,
 		},
 		{
 			"ray-x/lsp_signature.nvim",
 			event = "BufRead",
-			config = function()
-				require"lsp_signature".setup({
-					doc_lines = 10,
-					floating_window = true,
-					floating_window_above_cur_line = false,
-					extra_trigger_chars = { "(", "," }, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
-				})
-			end,
+			config = function() require("user.plugins.lsp_signature").config() end,
+		},
+		{
+			"benfowler/telescope-luasnip.nvim",
+			keys = { "<M-i>" },
+			config = function() require("user.plugins.telescope-luasnip").config() end,
+		},
+		{
+			"p00f/clangd_extensions.nvim",
+			ft = { "c", "cpp", "objc", "objcpp" },
+			config = function() require("user.plugins.clangd_extensions").config() end,
+		},
+		{
+			"windwp/nvim-ts-autotag",
+			config = function() require("user.plugins.nvim-ts-autotag").config() end,
+		},
+		{
+			"rmagatti/goto-preview",
+			config = function() require("user.plugins.goto-preview").config() end,
+		},
+		{
+			"tzachar/cmp-tabnine",
+			run = "./install.sh",
+			requires = "hrsh7th/nvim-cmp",
+			event = "InsertEnter",
+		},
+		----------------------
+		--- File Operation ---
+		----------------------
+		{
+			"folke/persistence.nvim",
+			event = "BufReadPre", -- this will only start session saving when an actual file was opened
+			module = "persistence",
+			config = function() require("user.plugins.persistence").config() end,
+		},
+		-----------------------
+		--- Buffer Elements ---
+		-----------------------
+		{
+			"petertriho/nvim-scrollbar",
+			config = function() require("user.plugins.nvim-scrollbar").config() end,
+		},
+		{
+			"sidebar-nvim/sidebar.nvim",
+			cmd = "Sidebar*",
+			config = function() require("user.plugins.sidebar").config() end,
 		},
 		{
 			"simrat39/symbols-outline.nvim",
-			config = function()
-				require('symbols-outline').setup()
-			end
+			cmd = "SymbolsOutline*",
+			config = function() require("user.plugins.symbols-outline").config() end,
 		},
-		--------------
-		-- Genernal --
-		--------------
 		{
 			"folke/todo-comments.nvim",
 			event = "BufRead",
-			config = function()
-				require("todo-comments").setup()
-			end,
+			config = function() require("user.plugins.todo-comments").config() end,
 		},
 		{
 			"itchyny/vim-cursorword",
 			event = {"BufEnter", "BufNewFile"},
-			config = function()
-				vim.api.nvim_command("augroup user_plugin_cursorword")
-				vim.api.nvim_command("autocmd!")
-				vim.api.nvim_command("autocmd FileType NvimTree,lspsagafinder,dashboard,vista let b:cursorword = 0")
-				vim.api.nvim_command("autocmd WinEnter * if &diff || &pvw | let b:cursorword = 0 | endif")
-				vim.api.nvim_command("autocmd InsertEnter * let b:cursorword = 0")
-				vim.api.nvim_command("autocmd InsertLeave * let b:cursorword = 1")
-				vim.api.nvim_command("augroup END")
-			end
+			config = function() require("user.plugins.vim-cursorword").config() end,
+		},
+		{
+			"tpope/vim-surround",
+			keys = { "c", "d", "y" },
+			-- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
+			-- setup = function()
+			--  vim.o.timeoutlen = 500
+			-- end
+		},
+		{ "tpope/vim-repeat" },
+		--------------------------------
+		--- Interface beautification ---
+		--------------------------------
+		{
+			"p00f/nvim-ts-rainbow",
+		},
+		{
+			"norcalli/nvim-colorizer.lua",
+			config = function() require("user.plugins.colorizer").config() end,
 		},
 		---------
 		-- Git --
