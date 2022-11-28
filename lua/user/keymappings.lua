@@ -22,8 +22,6 @@ local function basic_mappings()
 	-- Cursor motion --
 	-------------------
 	map("c", "<C-a>", "<C-b>")
-	map("n", "H", "0")
-	map("n", "L", "$")
 	map("n", "n", "nzz")
 	map("n", "N", "Nzz")
 	map("n", "G", "Gzz")
