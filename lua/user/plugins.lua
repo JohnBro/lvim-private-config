@@ -77,6 +77,12 @@ M.config = function()
 			setup = function() require("user.plugins.vim-visual-multi").setup() end,
 			config = function() require("user.plugins.vim-visual-multi").config() end,
 		},
+    {
+      'junegunn/vim-easy-align',
+      keys = { "ga" },
+      cmd = "EasyAlign",
+      config = function() require("user.plugins.vim-easy-align").config() end,
+    },
 		---------------------
 		-- LSP Enhancement --
 		---------------------
