@@ -1,11 +1,20 @@
+-- Neovim
+-- =========================================
+lvim.leader = "space"
+lvim.colorscheme = "lunar" -- set to a custom theme
+lvim.builtin.time_based_themes = true -- set false to use your own configured theme
+lvim.transparent_window = false -- enable/disable transparency
+lvim.debug = false
+vim.lsp.set_log_level "error"
+lvim.log.level = "warn"
+
 require("user.neovim").config()
 require("user.alpha").config()
 require("user.statusline").config()
 
 -- general
-lvim.log.level = "warn"
 lvim.format_on_save.enabled = false
-lvim.colorscheme = "lunar"
+lvim.builtin.tabnine = { active = true } -- change to false if you don't like tabnine
 lvim.builtin.bufferline.options.always_show_bufferline = true
 lvim.builtin.terminal.active = true
 lvim.builtin.terminal.open_mapping = "<C-Space>" -- <C-`>

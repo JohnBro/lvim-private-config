@@ -67,7 +67,6 @@ local function basic_mappings()
 end
 
 local function whichkey_mappings()
-	lvim.leader = "space"
   local which_key = lvim.builtin.which_key
   which_key.mappings["b"] = {
     name = "Buffers",

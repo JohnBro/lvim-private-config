@@ -118,8 +118,18 @@ M.config = function()
 			"tzachar/cmp-tabnine",
 			run = "./install.sh",
 			requires = "hrsh7th/nvim-cmp",
-			event = "InsertEnter",
-		},
+      config = function()
+        local tabnine = require "cmp_tabnine.config"
+        tabnine:setup {
+          max_lines = 1000,
+          max_num_results = 10,
+          sort = true,
+        }
+      end,
+      event = "InsertEnter",
+      opt = true,
+      disable = not lvim.builtin.tabnine.active,
+    },
 		----------------------
 		--- File Operation ---
 		----------------------
