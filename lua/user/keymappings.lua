@@ -68,28 +68,34 @@ end
 
 local function whichkey_mappings()
 	lvim.leader = "space"
-	lvim.builtin.which_key.mappings["bd"] = {
-		"<cmd>BufferKill<cr>", "Kill Buffer",
+  local which_key = lvim.builtin.which_key
+  which_key.mappings["b"] = {
+    name = "Buffers",
+    b = { "<CMD>Telescope buffers<cr>", "Buffers" },
+    d = { "<cmd>BufferKill<cr>", "Kill Buffer" },
+    e = { "<cmd>BufferLinePickClose<cr>", "Pick which buffer to close" },
+    h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
+    l = { "<cmd>BufferLineCloseRight<cr>", "Close all to the right", },
+    n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
+    p = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
+    j = { "<cmd>BufferLinePick<cr>", "Jump" },
+    D = { "<cmd>BufferLineSortByDirectory<cr>", "Sort by directory", },
+    L = { "<cmd>BufferLineSortByExtension<cr>", "Sort by language", },
 	}
-	lvim.builtin.which_key.mappings["bb"] = {
-		"<cmd>Telescope buffers<cr>", "Buffers",
-	}
-	lvim.builtin.which_key.mappings["bf"] = {}
-	lvim.builtin.which_key.mappings["c"] = {}
-	lvim.builtin.which_key.mappings["e"] = {}
-	lvim.builtin.which_key.mappings["f"] = {
+	which_key.mappings["bf"] = {}
+	which_key.mappings["c"] = {}
+	which_key.mappings["e"] = {}
+	which_key.mappings["f"] = {
 		name = "+Find",
 		f = { "<cmd>Telescope find_files<cr>", "Find Files"},
 		h = { "<cmd>Telescope help_tags<cr>", "Vim Tags" },
 		r = { "<cmd>Telescope oldfiles<cr>", "History files" },
+
 	}
-	lvim.builtin.which_key.mappings["h"] = {}
-	lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-	lvim.builtin.which_key.mappings["t"] = {
-		name = "+Toggle",
-		e = { "<CMD>NvimTreeToggle<CR>", "Explorer" },
-		o = { "<CMD>SymbolsOutline<CR>", "SymbolsOutline" }
-	}
+	which_key.mappings["h"] = {}
+  which_key.mappings["LC"] = { "<CMD>Telescope commands<CR>", "Commands" }
+	which_key.mappings["P"] = { "<CMD>Telescope projects<CR>", "Projects" }
+	which_key.mappings["o"] = { "<CMD>SymbolsOutline<CR>", "Outline" }
 end
 
 local function plugins_mappings()
