@@ -7,9 +7,16 @@ M.config = function()
 		---------------------
 		{
 			"karb94/neoscroll.nvim",
-			event = "WinScrolled",
+			event = "BufRead",
 			config = function() require("user.plugins.neoscroll").config() end,
+      disable = lvim.builtin.smooth_scroll ~= "neoscroll",
 		},
+    {
+      "declancm/cinnamon.nvim",
+      config = function() require("user.plugins.cinnamon").config() end,
+      event = "BufRead",
+      disable = lvim.builtin.smooth_scroll ~= "cinnamon",
+    },
 		---------------------
 		--- Cursor Motion ---
 		---------------------
@@ -20,9 +27,15 @@ M.config = function()
 		},
 		{
 			"phaazon/hop.nvim",
-			cmd = "Hop*",
+      event = "BufRead",
 			config = function() require("user.plugins.hop").config() end,
+      disable = lvim.builtin.motion_provider ~= "hop",
 		},
+    {
+      "ggandor/leap.nvim",
+      config = function() require("user.plugins.leap").config() end,
+      disable = lvim.builtin.motion_provider ~= "leap",
+    },
 		{
 			"andymass/vim-matchup",
 			event = "CursorMoved",
@@ -138,6 +151,7 @@ M.config = function()
 			event = "BufReadPre", -- this will only start session saving when an actual file was opened
 			module = "persistence",
 			config = function() require("user.plugins.persistence").config() end,
+      disable = not lvim.builtin.persistence.active,
 		},
 		-----------------------
 		--- Buffer Elements ---
@@ -175,6 +189,16 @@ M.config = function()
 			-- end
 		},
 		{ "tpope/vim-repeat" },
+    {
+      "lunarvim/bigfile.nvim",
+      config = function()
+        pcall(function()
+          require("bigfile").config(lvim.builtin.bigfile.config)
+        end)
+      end,
+      disable = not lvim.builtin.bigfile.active,
+    },
+    { "mtdl9/vim-log-highlighting", ft = { "text", "log" } },
 		--------------------------------
 		--- Interface beautification ---
 		--------------------------------
@@ -183,8 +207,27 @@ M.config = function()
 		},
 		{
 			"norcalli/nvim-colorizer.lua",
-			config = function() require("user.plugins.colorizer").config() end,
+			config = function() require("user.plugins.nvim-colorizer").config() end,
 		},
+    {
+      "b0o/incline.nvim",
+      config = function() require("user.plugins.incline").config() end,
+      disable = lvim.builtin.winbar_provider ~= "filename",
+    },
+    {
+      "fgheng/winbar.nvim",
+      config = function() require("user.plugins.winbar").config() end,
+      event = { "InsertEnter", "CursorHoldI" },
+      disable = lvim.builtin.winbar_provider ~= "treesitter",
+    },
+    {
+      "SmiteshP/nvim-gps",
+      module_pattern = { "gps", "nvim-gps" },
+      config = function() require("user.plugins.nvim-gps").config() end,
+      requires = "nvim-treesitter/nvim-treesitter",
+      event = { "InsertEnter", "CursorHoldI" },
+      disable = lvim.builtin.winbar_provider ~= "treesitter",
+    },
 		---------
 		-- Git --
 		---------

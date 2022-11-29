@@ -1,47 +1,6 @@
 M = {}
 
-M.config = function()
-  local text = require "lvim.interface.text"
-  lvim.builtin.alpha.active = true
-  lvim.builtin.alpha.mode = "dashboard"
-  lvim.builtin.alpha.dashboard.section.header = {
-    type = "text",
-    val = M.dashboard(),
-    opts = {
-      position = "center",
-      hl = "Label",
-    },
-  }
-  lvim.builtin.alpha.dashboard.section.footer = {
-    type = "text",
-    val = text.align_center({ width = 0 }, {
-      "Johnbro",
-      "Powered by lunarvim.org",
-    }, 0.5),
-    opts = {
-      position = "center",
-      hl = "Number",
-    },
-  }
-  local status_ok, dashboard = pcall(require, "alpha.themes.dashboard")
-  if status_ok then
-    local function button(sc, txt, keybind, keybind_opts)
-      local b = dashboard.button(sc, txt, keybind, keybind_opts)
-      b.opts.hl_shortcut = "Include"
-      return b
-    end
-    table.insert(
-      lvim.builtin.alpha.dashboard.section.buttons.val,
-      button("h", "  Find Help", '<CMD>Telescope help_tags<CR>')
-    )
-    table.insert(
-      lvim.builtin.alpha.dashboard.section.buttons.val,
-      button("b", "  Find bookmarks", "<CMD>Telescope vim_bookmarks all<CR>" )
-    )
-  end
-end
-
-M.dashboard = function()
+local dashboard = function()
   local headers = {
     {
       [[                               __                ]],
@@ -114,5 +73,47 @@ M.dashboard = function()
   }
   return headers[2]
 end
+
+M.config = function()
+  local text = require "lvim.interface.text"
+  lvim.builtin.alpha.active = true
+  lvim.builtin.alpha.mode = "dashboard"
+  lvim.builtin.alpha.dashboard.section.header = {
+    type = "text",
+    val = dashboard(),
+    opts = {
+      position = "center",
+      hl = "Label",
+    },
+  }
+  lvim.builtin.alpha.dashboard.section.footer = {
+    type = "text",
+    val = text.align_center({ width = 0 }, {
+      "Johnbro",
+      "Powered by lunarvim.org",
+    }, 0.5),
+    opts = {
+      position = "center",
+      hl = "Number",
+    },
+  }
+  local status_ok, dashboard = pcall(require, "alpha.themes.dashboard")
+  if status_ok then
+    local function button(sc, txt, keybind, keybind_opts)
+      local b = dashboard.button(sc, txt, keybind, keybind_opts)
+      b.opts.hl_shortcut = "Include"
+      return b
+    end
+    table.insert(
+      lvim.builtin.alpha.dashboard.section.buttons.val,
+      button("h", "  Find Help", '<CMD>Telescope help_tags<CR>')
+    )
+    table.insert(
+      lvim.builtin.alpha.dashboard.section.buttons.val,
+      button("b", "  Find bookmarks", "<CMD>Telescope vim_bookmarks all<CR>" )
+    )
+  end
+end
+
 
 return M

@@ -7,6 +7,7 @@ lvim.transparent_window = false -- enable/disable transparency
 lvim.debug = false
 vim.lsp.set_log_level "error"
 lvim.log.level = "warn"
+lvim.builtin.bufferline.options.always_show_bufferline = true
 
 require("user.neovim").config()
 require("user.alpha").config()
@@ -14,9 +15,16 @@ require("user.statusline").config()
 
 -- general
 lvim.format_on_save.enabled = false
+lvim.builtin.smooth_scroll = "neoscroll" -- for smoth scrolling, can be "cinnamon", "neoscroll" or ""
 lvim.builtin.tabnine = { active = true } -- change to false if you don't like tabnine
-lvim.builtin.bufferline.options.always_show_bufferline = true
+lvim.builtin.persistence = { active = true } -- change to false if you don't want persistence
+lvim.builtin.dap.active = false -- change this to enable/disable debugging
 lvim.builtin.terminal.active = true
+lvim.builtin.motion_provider = "hop" -- change this to use different motion providers ( hop or leap )
+lvim.builtin.winbar_provider = "filename" -- can be "filename" or "treesitter" or "navic" or ""
+lvim.builtin.nonumber_unfocus = false -- diffrentiate between focused and non focused windows
+-- TODO: wait for mainlline bigfile plugin: https://github.com/LunarVim/LunarVim/commit/fb7da7bc788849ae0b735eeec521ea677c35de1f
+lvim.builtin.bigfile = { active = true, config = {} }
 lvim.builtin.terminal.open_mapping = "<C-Space>" -- <C-`>
 
 if (vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1) then
@@ -36,6 +44,7 @@ else
 	lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
 end
 
+require("user.autocommands").config()
 require("user.treesitter").config()
 require("user.lsp").config()
 require("user.plugins").config()

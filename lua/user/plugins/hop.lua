@@ -1,7 +1,12 @@
 local M = {}
 
 M.config = function()
-	require("hop").setup({})
+  local status_ok, hop = pcall(require, "hop")
+  if not status_ok then
+    return
+  end
+  hop.setup()
+  require("user.keymappings").set_hop_keymaps()
 end
 
 return M
