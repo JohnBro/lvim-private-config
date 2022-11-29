@@ -9,7 +9,7 @@ M.config = function()
     val = M.dashboard(),
     opts = {
       position = "center",
-      hl = "Comment",
+      hl = "Label",
     },
   }
   lvim.builtin.alpha.dashboard.section.footer = {
@@ -36,7 +36,7 @@ M.config = function()
     )
     table.insert(
       lvim.builtin.alpha.dashboard.section.buttons.val,
-      button("b", "  Find bookmarks", "<CMD>Telescope vim_bookmarks all<CR>" ) 
+      button("b", "  Find bookmarks", "<CMD>Telescope vim_bookmarks all<CR>" )
     )
   end
 end
