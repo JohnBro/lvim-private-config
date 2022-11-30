@@ -7,14 +7,14 @@ M.config = function()
 		---------------------
 		{
 			"karb94/neoscroll.nvim",
-			event = "BufRead",
-			config = function() require("user.plugins.neoscroll").config() end,
+			event   = "BufRead",
+			config  = function() require("user.plugins.neoscroll").config() end,
       disable = lvim.builtin.smooth_scroll ~= "neoscroll",
 		},
     {
       "declancm/cinnamon.nvim",
-      config = function() require("user.plugins.cinnamon").config() end,
-      event = "BufRead",
+      config  = function() require("user.plugins.cinnamon").config() end,
+      event   = "BufRead",
       disable = lvim.builtin.smooth_scroll ~= "cinnamon",
     },
 		---------------------
@@ -22,18 +22,19 @@ M.config = function()
 		---------------------
 		{
 			"rhysd/clever-f.vim",
-			keys = { "f", "F", "t", "T" },
-			setup = function() require("user.plugins.clever-f").setup() end,
+			keys    = { "f", "F", "t", "T" },
+			setup   = function() require("user.plugins.clever-f").setup() end,
+      disable = lvim.builtin.motion_provider ~= "clever",
 		},
 		{
 			"phaazon/hop.nvim",
-      event = "BufRead",
-			config = function() require("user.plugins.hop").config() end,
+      event   = "BufRead",
+			config  = function() require("user.plugins.hop").config() end,
       disable = lvim.builtin.motion_provider ~= "hop",
 		},
     {
       "ggandor/leap.nvim",
-      config = function() require("user.plugins.leap").config() end,
+      config  = function() require("user.plugins.leap").config() end,
       disable = lvim.builtin.motion_provider ~= "leap",
     },
 		{
@@ -46,40 +47,36 @@ M.config = function()
 		--------------------
 		{
 			"ethanholz/nvim-lastplace",
-			event = "BufRead",
+			event  = "BufRead",
 			config = function() require("user.plugins.lastplace").config() end,
 		},
 		{
 			"MattesGroeger/vim-bookmarks",
-			event = "BufRead",
-			setup = function() require("user.plugins.vim-bookmarks").setup() end,
+			event  = "BufRead",
+			setup  = function() require("user.plugins.vim-bookmarks").setup() end,
 			config = function() require("user.plugins.vim-bookmarks").config() end,
 		},
 		{
 			"tom-anders/telescope-vim-bookmarks.nvim",
-			keys = { "ml", "mL", "mm", "mM", "b" },
+			keys   = { "ml", "mL", "mm", "mM", "b" },
+      cmd    = "Telescope vim_bookmarks",
 			config = function() require("user.plugins.telescope-vim-bookmarks").config() end,
 		},
 		-----------------
 		--- Grep Text ---
 		-----------------
 		{
-			"bronson/vim-visual-star-search",
-			keys = { { "v", "*" }, { "v", "#" }, { "v", "g*" }, { "v", "g#" } },
-		},
-		{
 			"romainl/vim-cool",
 			event = "CursorMoved",
 		},
 		{
 			"nvim-telescope/telescope-live-grep-args.nvim",
-			keys = { "<C-M-F>" },
-      cmd = "Telescope vim_bookmarks",
+			keys   = { "<C-M-F>" },
 			config = function() require("user.plugins.telescope-live-grep-args").config() end,
 		},
 		{
 			"nacro90/numb.nvim",
-			event = "BufRead",
+			event  = "BufRead",
 			config = function() require("user.plugins.numb").config() end,
 		},
 		------------------
@@ -87,14 +84,14 @@ M.config = function()
 		------------------
 		{
 			"mg979/vim-visual-multi",
-			keys = { "<C-n>", { "v", "<C-n>" }, "<C-M-L>", { "v", "<C-M-L>" }, "ma", { "v", "ma" } },
-			setup = function() require("user.plugins.vim-visual-multi").setup() end,
+			keys   = { "<C-n>", { "v", "<C-n>" }, "<C-M-L>", { "v", "<C-M-L>" }, "ma", { "v", "ma" } },
+			setup  = function() require("user.plugins.vim-visual-multi").setup() end,
 			config = function() require("user.plugins.vim-visual-multi").config() end,
 		},
     {
       'junegunn/vim-easy-align',
-      keys = { "ga" },
-      cmd = "EasyAlign",
+      keys   = { "ga" },
+      cmd    = "EasyAlign",
       config = function() require("user.plugins.vim-easy-align").config() end,
     },
 		---------------------
@@ -102,27 +99,28 @@ M.config = function()
 		---------------------
 		{
 			"j-hui/fidget.nvim",
-			event = "BufRead",
+			event  = "BufRead",
 			config = function() require("user.plugins.fidget").config() end,
 		},
 		{
 			"ray-x/lsp_signature.nvim",
-			event = "BufRead",
+			event  = "BufRead",
 			config = function() require("user.plugins.lsp_signature").config() end,
 		},
 		{
 			"benfowler/telescope-luasnip.nvim",
-			keys = { "<M-i>" },
+			keys   = { "<M-i>" },
 			config = function() require("user.plugins.telescope-luasnip").config() end,
 		},
 		{
 			"p00f/clangd_extensions.nvim",
-			ft = { "c", "cpp", "objc", "objcpp" },
+			ft     = { "c", "cpp", "objc", "objcpp" },
 			config = function() require("user.plugins.clangd_extensions").config() end,
 		},
 		{
 			"windwp/nvim-ts-autotag",
-			config = function() require("user.plugins.nvim-ts-autotag").config() end,
+			config  = function() require("user.plugins.nvim-ts-autotag").config() end,
+      disable = true,
 		},
 		{
 			"rmagatti/goto-preview",
@@ -130,18 +128,18 @@ M.config = function()
 		},
 		{
 			"tzachar/cmp-tabnine",
-			run = "./install.sh",
+			run      = "./install.sh",
 			requires = "hrsh7th/nvim-cmp",
-      config = function()
-        local tabnine = require "cmp_tabnine.config"
+      config   = function()
+        local tabnine = require "cmp_tabnine.config" 
         tabnine:setup {
-          max_lines = 1000,
+          max_lines       = 1000,
           max_num_results = 10,
-          sort = true,
+          sort            = true,
         }
       end,
-      event = "InsertEnter",
-      opt = true,
+      event   = "InsertEnter",
+      opt     = true,
       disable = not lvim.builtin.tabnine.active,
     },
 		----------------------
@@ -149,9 +147,9 @@ M.config = function()
 		----------------------
 		{
 			"folke/persistence.nvim",
-			event = "BufReadPre", -- this will only start session saving when an actual file was opened
-			module = "persistence",
-			config = function() require("user.plugins.persistence").config() end,
+			event   = "BufReadPre", -- this will only start session saving when an actual file was opened
+			module  = "persistence",
+			config  = function() require("user.plugins.persistence").config() end,
       disable = not lvim.builtin.persistence.active,
 		},
 		-----------------------
@@ -163,23 +161,23 @@ M.config = function()
 		},
 		{
 			"sidebar-nvim/sidebar.nvim",
-			cmd = "Sidebar*",
+			cmd    = "Sidebar*",
 			config = function() require("user.plugins.sidebar").config() end,
 		},
 		{
 			"simrat39/symbols-outline.nvim",
-			cmd = "SymbolsOutline*",
+			cmd    = "SymbolsOutline*",
 			config = function() require("user.plugins.symbols-outline").config() end,
 		},
 		{
 			"folke/todo-comments.nvim",
-			event = "BufRead",
+			event  = "BufRead",
 			config = function() require("user.plugins.todo-comments").config() end,
 		},
 		{
 			"itchyny/vim-cursorword",
-			event = {"BufEnter", "BufNewFile"},
-			config = function() require("user.plugins.vim-cursorword").config() end,
+			event   = {"BufEnter", "BufNewFile"},
+			config  = function() require("user.plugins.vim-cursorword").config() end,
       disable = not lvim.builtin.cursorword.active,
 		},
 		{
@@ -213,22 +211,22 @@ M.config = function()
 		},
     {
       "b0o/incline.nvim",
-      config = function() require("user.plugins.incline").config() end,
+      config  = function() require("user.plugins.incline").config() end,
       disable = lvim.builtin.winbar_provider ~= "filename",
     },
     {
       "fgheng/winbar.nvim",
-      config = function() require("user.plugins.winbar").config() end,
-      event = { "InsertEnter", "CursorHoldI" },
+      config  = function() require("user.plugins.winbar").config() end,
+      event   = { "InsertEnter", "CursorHoldI" },
       disable = lvim.builtin.winbar_provider ~= "treesitter",
     },
     {
       "SmiteshP/nvim-gps",
       module_pattern = { "gps", "nvim-gps" },
-      config = function() require("user.plugins.nvim-gps").config() end,
-      requires = "nvim-treesitter/nvim-treesitter",
-      event = { "InsertEnter", "CursorHoldI" },
-      disable = lvim.builtin.winbar_provider ~= "treesitter",
+      config         = function() require("user.plugins.nvim-gps").config() end,
+      requires       = "nvim-treesitter/nvim-treesitter",
+      event          = { "InsertEnter", "CursorHoldI" },
+      disable        = lvim.builtin.winbar_provider ~= "treesitter",
     },
 		---------
 		-- Git --

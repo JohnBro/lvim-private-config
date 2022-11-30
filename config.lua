@@ -20,7 +20,7 @@ lvim.builtin.tabnine = { active = true } -- change to false if you don't like ta
 lvim.builtin.persistence = { active = true } -- change to false if you don't want persistence
 lvim.builtin.dap.active = false -- change this to enable/disable debugging
 lvim.builtin.terminal.active = true
-lvim.builtin.motion_provider = "hop" -- change this to use different motion providers ( hop or leap )
+lvim.builtin.motion_provider = "hop" -- change this to use different motion providers ( clever or hop or leap )
 lvim.builtin.winbar_provider = "filename" -- can be "filename" or "treesitter" or "navic" or ""
 lvim.builtin.nonumber_unfocus = false -- diffrentiate between focused and non focused windows
 lvim.builtin.cursorword = { active = true } -- use a bit fancier cursorword
