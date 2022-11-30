@@ -74,6 +74,7 @@ M.config = function()
 		{
 			"nvim-telescope/telescope-live-grep-args.nvim",
 			keys = { "<C-M-F>" },
+      cmd = "Telescope vim_bookmarks",
 			config = function() require("user.plugins.telescope-live-grep-args").config() end,
 		},
 		{
@@ -176,10 +177,17 @@ M.config = function()
 			config = function() require("user.plugins.todo-comments").config() end,
 		},
 		{
-			"itchyny/vim-cursorword",
+			"itchyny/vim-cursorword", -- implement by VIM
 			event = {"BufEnter", "BufNewFile"},
 			config = function() require("user.plugins.vim-cursorword").config() end,
+      disable = lvim.builtin.cursorword_provider ~= "vim",
 		},
+    {
+      "xiyaowong/nvim-cursorword",
+      event = { "BufferEnter", "BufNewFile" },
+      config = function() require("user.plugins.nvim-cursorline").config() end,
+      disable = lvim.builtin.cursorword_provider ~= "nvim",
+    },
 		{
 			"tpope/vim-surround",
 			keys = { "c", "d", "y" },
