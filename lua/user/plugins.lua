@@ -177,17 +177,11 @@ M.config = function()
 			config = function() require("user.plugins.todo-comments").config() end,
 		},
 		{
-			"itchyny/vim-cursorword", -- implement by VIM
+			"itchyny/vim-cursorword",
 			event = {"BufEnter", "BufNewFile"},
 			config = function() require("user.plugins.vim-cursorword").config() end,
-      disable = lvim.builtin.cursorword_provider ~= "vim",
+      disable = not lvim.builtin.cursorword.active,
 		},
-    {
-      "xiyaowong/nvim-cursorword",
-      event = { "BufferEnter", "BufNewFile" },
-      config = function() require("user.plugins.nvim-cursorline").config() end,
-      disable = lvim.builtin.cursorword_provider ~= "nvim",
-    },
 		{
 			"tpope/vim-surround",
 			keys = { "c", "d", "y" },

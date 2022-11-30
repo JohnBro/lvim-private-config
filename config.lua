@@ -23,7 +23,7 @@ lvim.builtin.terminal.active = true
 lvim.builtin.motion_provider = "hop" -- change this to use different motion providers ( hop or leap )
 lvim.builtin.winbar_provider = "filename" -- can be "filename" or "treesitter" or "navic" or ""
 lvim.builtin.nonumber_unfocus = false -- diffrentiate between focused and non focused windows
-lvim.builtin.cursorword_provider = "nvim" -- use a bit fancier cursorword (vim or nvim)
+lvim.builtin.cursorword = { active = true } -- use a bit fancier cursorword
 -- TODO: wait for mainlline bigfile plugin: https://github.com/LunarVim/LunarVim/commit/fb7da7bc788849ae0b735eeec521ea677c35de1f
 lvim.builtin.bigfile = { active = true, config = {} }
 lvim.builtin.terminal.open_mapping = "<C-Space>" -- <C-`>
