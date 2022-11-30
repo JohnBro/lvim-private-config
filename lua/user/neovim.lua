@@ -37,6 +37,7 @@ M.config = function()
 		vim.opt.guifont = "Courier New:h13" -- the font used in graphical neovim applications
 		-- Set a compatible clipboard manager
 		vim.g.clipboard = {
+      name = "win32-yank",
 			copy = {
 				["+"] = "win32yank.exe -i --crlf",
 				["*"] = "win32yank.exe -i --crlf",
@@ -45,6 +46,19 @@ M.config = function()
 				["+"] = "win32yank.exe -o --lf",
 				["*"] = "win32yank.exe -o --lf",
 			},
+		}
+  elseif (vim.fn.has("wsl") == 1) then
+		vim.g.clipboard = {
+			name = "win32yank-wsl",
+			copy = {
+				["+"] = "win32yank.exe -i --crlf",
+				["*"] = "win32yank.exe -i --crlf",
+			},
+			paste = {
+				["+"] = "win32yank.exe -o --lf",
+				["*"] = "win32yank.exe -o --lf",
+			},
+			cache_enabled = 0,
 		}
 	else
 			vim.opt.guifont = "NerdCodePro Font:h13"
