@@ -57,7 +57,7 @@ M.config = function()
 		},
 		{
 			"tom-anders/telescope-vim-bookmarks.nvim",
-			keys = { "ml", "mL" },
+			keys = { "ml", "mL", "mm", "mM", "b" },
 			config = function() require("user.plugins.telescope-vim-bookmarks").config() end,
 		},
 		-----------------
