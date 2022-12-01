@@ -189,15 +189,6 @@ M.config = function()
 			-- end
 		},
 		{ "tpope/vim-repeat" },
-    {
-      "lunarvim/bigfile.nvim",
-      config = function()
-        pcall(function()
-          require("bigfile").config(lvim.builtin.bigfile.config)
-        end)
-      end,
-      disable = not lvim.builtin.bigfile.active,
-    },
     { "mtdl9/vim-log-highlighting", ft = { "text", "log" } },
 		--------------------------------
 		--- Interface beautification ---

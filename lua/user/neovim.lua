@@ -34,7 +34,7 @@ M.config = function()
 		let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 		set shellquote= shellxquote=
 		]]
-		vim.opt.guifont = "Fira Code:h14" -- the font used in graphical neovim applications
+		vim.opt.guifont = "Courier New:h13" -- the font used in graphical neovim applications
 		-- Set a compatible clipboard manager
 		vim.g.clipboard = {
       name = "win32-yank",
@@ -201,7 +201,6 @@ M.config = function()
 
   vim.o.secure = true -- Disable autocmd etc for project local vimrc files.
   vim.o.exrc = false -- Allow project local vimrc files example .nvimrc see :h exrc
-  vim.o.qftf = "{info -> v:lua._G.qftf(info)}"
   -- vim.o.conceallevel = 2 -- uncomment if you want to see concealed text
 
   vim.wo.foldmethod = "expr"
@@ -215,53 +214,6 @@ M.config = function()
   vim.g.dashboard_enable_session = 0
   vim.g.dashboard_disable_statusline = 1
 
-  if vim.g.nvui then
-    -- Configure nvui here
-    vim.cmd [[NvuiCmdFontFamily FiraCode Nerd Font]]
-    vim.cmd [[set linespace=1]]
-    vim.cmd [[set guifont=FiraCode\ Nerd\ Font:h14]]
-    vim.cmd [[NvuiPopupMenuDefaultIconFg white]]
-    vim.cmd [[NvuiCmdBg #1e2125]]
-    vim.cmd [[NvuiCmdFg #abb2bf]]
-    vim.cmd [[NvuiCmdBigFontScaleFactor 1.0]]
-    vim.cmd [[NvuiCmdPadding 10]]
-    vim.cmd [[NvuiCmdCenterXPos 0.5]]
-    vim.cmd [[NvuiCmdTopPos 0.0]]
-    vim.cmd [[NvuiCmdFontSize 20.0]]
-    vim.cmd [[NvuiCmdBorderWidth 5]]
-    vim.cmd [[NvuiPopupMenuIconFg variable #56b6c2]]
-    vim.cmd [[NvuiPopupMenuIconFg function #c678dd]]
-    vim.cmd [[NvuiPopupMenuIconFg method #c678dd]]
-    vim.cmd [[NvuiPopupMenuIconFg field #d19a66]]
-    vim.cmd [[NvuiPopupMenuIconFg property #d19a66]]
-    vim.cmd [[NvuiPopupMenuIconFg module white]]
-    vim.cmd [[NvuiPopupMenuIconFg struct #e5c07b]]
-    vim.cmd [[NvuiCaretExtendTop 15]]
-    vim.cmd [[NvuiCaretExtendBottom 8]]
-    vim.cmd [[NvuiTitlebarFontSize 12]]
-    vim.cmd [[NvuiTitlebarFontFamily Arial]]
-    vim.cmd [[NvuiCursorAnimationDuration 0.1]]
-    -- vim.cmd [[NvuiToggleFrameless]]
-    vim.cmd [[NvuiOpacity 0.99]]
-  end
-end
-
--- credit: https://github.com/nyngwang/NeoZoom.lua
-function M.maximize_current_split()
-  local cur_win = vim.api.nvim_get_current_win()
-  vim.api.nvim_set_var("non_float_total", 0)
-  vim.cmd "windo if &buftype != 'nofile' | let g:non_float_total += 1 | endif"
-  vim.api.nvim_set_current_win(cur_win or 0)
-  if vim.api.nvim_get_var "non_float_total" == 1 then
-    if vim.fn.tabpagenr "$" == 1 then
-      return
-    end
-    vim.cmd "tabclose"
-  else
-    local last_cursor = vim.api.nvim_win_get_cursor(0)
-    vim.cmd "tabedit %:p"
-    vim.api.nvim_win_set_cursor(0, last_cursor)
-  end
 end
 
 return M

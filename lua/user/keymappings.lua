@@ -157,6 +157,11 @@ M.set_hop_keymaps = function()
   )
 end
 
+M.set_easyalign_keymaps = function()
+  map("x", "ga", "<Plug>(EasyAlign)", { silent = false} )
+  map("n", "ga", "<Plug>(EasyAlign)", { silent = false} )
+end
+
 M.config = function()
 	basic_mappings()
 	whichkey_mappings()

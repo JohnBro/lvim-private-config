@@ -4,14 +4,12 @@ lvim.leader = "space"
 lvim.colorscheme = "lunar" -- set to a custom theme
 lvim.builtin.time_based_themes = true -- set false to use your own configured theme
 lvim.transparent_window = false -- enable/disable transparency
+lvim.builtin.alpha.active = true
+lvim.builtin.alpha.mode = "dashboard"
 lvim.debug = false
-vim.lsp.set_log_level "error"
+-- vim.lsp.set_log_level "error"
 lvim.log.level = "warn"
-lvim.builtin.bufferline.options.always_show_bufferline = true
-
-require("user.neovim").config()
-require("user.alpha").config()
-require("user.statusline").config()
+-- lvim.builtin.bufferline.options.always_show_bufferline = true
 
 -- general
 lvim.format_on_save.enabled = false
@@ -24,8 +22,7 @@ lvim.builtin.motion_provider = "hop" -- change this to use different motion prov
 lvim.builtin.winbar_provider = "filename" -- can be "filename" or "treesitter" or "navic" or ""
 lvim.builtin.nonumber_unfocus = false -- diffrentiate between focused and non focused windows
 lvim.builtin.cursorword = { active = true } -- use a bit fancier cursorword
--- TODO: wait for mainlline bigfile plugin: https://github.com/LunarVim/LunarVim/commit/fb7da7bc788849ae0b735eeec521ea677c35de1f
-lvim.builtin.bigfile = { active = true, config = {} }
+lvim.builtin.tabnine = { active = false }
 lvim.builtin.terminal.open_mapping = "<C-Space>" -- <C-`>
 
 if (vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1) then
@@ -45,6 +42,9 @@ else
 	lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
 end
 
+require("user.neovim").config()
+-- require("user.alpha").config()
+require("user.statusline").config()
 require("user.autocommands").config()
 require("user.treesitter").config()
 require("user.lsp").config()
