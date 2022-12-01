@@ -34,7 +34,7 @@ M.config = function()
 		let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 		set shellquote= shellxquote=
 		]]
-		vim.opt.guifont = "Courier New:h13" -- the font used in graphical neovim applications
+		vim.opt.guifont = "Fira Code:h14" -- the font used in graphical neovim applications
 		-- Set a compatible clipboard manager
 		vim.g.clipboard = {
       name = "win32-yank",
