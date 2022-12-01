@@ -1,8 +1,10 @@
 local M = {}
 
 local wins_treesitter_lang = {
-	"c",
+  "python",
 	"lua",
+  "json",
+  "markdown",
 }
 
 local unix_treesitter_lang = {
