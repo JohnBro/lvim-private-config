@@ -43,6 +43,11 @@ else
 end
 
 require("user.neovim").config()
+
+-- Override Lunarvim defaults
+-- =========================================
+require("user.builtin").config()
+
 -- require("user.alpha").config()
 require("user.statusline").config()
 require("user.autocommands").config()
