@@ -2,6 +2,13 @@ local M = {}
 
 M.config = function()
 	lvim.plugins = {
+    ---------------------------
+    --- Builtin Enhancement ---
+    ---------------------------
+    {
+      "keyvchan/telescope-find-pickers.nvim",
+      config = function() require("user.plugins.telescope.find-pickers").config() end,
+    },
 		---------------------
 		--- Screen Scroll ---
 		---------------------
@@ -45,6 +52,11 @@ M.config = function()
 		--------------------
 		--- Tag Jumpping ---
 		--------------------
+    {
+      "chentoast/marks.nvim",
+      event = "BufRead",
+      setup = function() require("user.plugins.marks").config() end,
+    },
 		{
 			"ethanholz/nvim-lastplace",
 			event  = "BufRead",
@@ -58,9 +70,9 @@ M.config = function()
 		},
 		{
 			"tom-anders/telescope-vim-bookmarks.nvim",
-			keys   = { "ml", "mL", "mm", "mM", "b" },
+			keys   = { "Ml", "ML", "Mm", "MM", "b" },
       cmd    = "Telescope vim_bookmarks",
-			config = function() require("user.plugins.telescope-vim-bookmarks").config() end,
+			config = function() require("user.plugins.telescope.vim-bookmarks").config() end,
 		},
 		-----------------
 		--- Grep Text ---
@@ -72,7 +84,7 @@ M.config = function()
 		{
 			"nvim-telescope/telescope-live-grep-args.nvim",
 			keys   = { "<C-M-F>" },
-			config = function() require("user.plugins.telescope-live-grep-args").config() end,
+			config = function() require("user.plugins.telescope.live-grep-args").config() end,
 		},
 		{
 			"nacro90/numb.nvim",
@@ -84,7 +96,7 @@ M.config = function()
 		------------------
 		{
 			"mg979/vim-visual-multi",
-			keys   = { "<C-n>", { "v", "<C-n>" }, "<C-M-L>", { "v", "<C-M-L>" }, "ma", { "v", "ma" } },
+			keys   = { "<C-n>", { "v", "<C-n>" }, "<C-M-L>", { "v", "<C-M-L>" }, "Ma", { "v", "Ma" } },
 			setup  = function() require("user.plugins.vim-visual-multi").setup() end,
 			config = function() require("user.plugins.vim-visual-multi").config() end,
 		},
@@ -110,7 +122,7 @@ M.config = function()
 		{
 			"benfowler/telescope-luasnip.nvim",
 			keys   = { "<M-i>" },
-			config = function() require("user.plugins.telescope-luasnip").config() end,
+			config = function() require("user.plugins.telescope.luasnip").config() end,
 		},
 		{
 			"p00f/clangd_extensions.nvim",
@@ -131,7 +143,7 @@ M.config = function()
 			run      = "./install.sh",
 			requires = "hrsh7th/nvim-cmp",
       config   = function()
-        local tabnine = require "cmp_tabnine.config" 
+        local tabnine = require "cmp_tabnine.config"
         tabnine:setup {
           max_lines       = 1000,
           max_num_results = 10,

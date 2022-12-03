@@ -17,15 +17,23 @@ M.config = function()
   dashboard.section.buttons.opts.spacing = 0
   table.insert(
     dashboard.section.buttons.entries,
-    { "C", UserIcons.misc.command .. "  Commands", "<CMD>Telescope commands"}
+    { "C", UserIcons.misc.command .. "  Commands", "<CMD>Telescope commands<CR>" }
   )
   table.insert(
     dashboard.section.buttons.entries,
-    { "h", UserIcons.misc.help .. "  Find Help", "<CMD>Telescope help_tags<CR>" }
+    { "m", UserIcons.misc.flag .. "  Marks", "<CMD>Telescope marks<CR>" }
   )
   table.insert(
     dashboard.section.buttons.entries,
     { "b", LvimIcons.ui.BookMark .. "  Find bookmarks", "<CMD>Telescope vim_bookmarks all<CR>" }
+  )
+  table.insert(
+    dashboard.section.buttons.entries,
+    { ".", LvimIcons.kind.Module .. "  Telescope pickers", "<CMD>Telescope find_pickers<CR>" }
+  )
+  table.insert(
+    dashboard.section.buttons.entries,
+    { "h", UserIcons.misc.help .. "  Find Help", "<CMD>Telescope help_tags<CR>" }
   )
 end
 

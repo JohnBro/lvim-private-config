@@ -15,8 +15,8 @@ end
 M.config = function()
 	vim.api.nvim_set_keymap("n", "<C-M-L>", "<Plug>(VM-Select-All)", {})
 	vim.api.nvim_set_keymap("v", "<C-M-L>", "<Plug>(VM-Visual-All)", {})
-	vim.api.nvim_set_keymap("n", "ma", "<Plug>(VM-Add-Cursor-At-Pos)", {})
-	vim.api.nvim_set_keymap("v", "ma", "<Plug>(VM-Visual-Add)", {})
+	vim.api.nvim_set_keymap("n", "Ma", "<Plug>(VM-Add-Cursor-At-Pos)", {})
+	vim.api.nvim_set_keymap("v", "Ma", "<Plug>(VM-Visual-Add)", {})
 end
 
 return M

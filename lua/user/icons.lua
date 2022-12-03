@@ -61,6 +61,7 @@ M.misc = {
   term = " ",
   help = "",
   command = "גּ",
+  flag = "⚑",
 }
 
 M.nvim_tree_icons = {
@@ -125,8 +126,8 @@ M.todo_comments = {
   HACK = " ",
   WARN = "裂",
   PERF = "龍",
-  NOTE = " ",
-  ERROR = " ",
+  NOTE = "",
+  ERROR = "",
   REFS = "",
   SHIELD = "",
 }

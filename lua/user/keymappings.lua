@@ -5,7 +5,8 @@ local function map(mode, lhs, rhs, opts)
 	if opts then
 		options = vim.tbl_extend("force", options, opts)
 	end
-	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+
+  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 local function unmap(mode, key)
@@ -54,7 +55,6 @@ local function basic_mappings()
 	---------------------
 	map("n", "<C-s>", ":w<cr>", { silent = false })
 	map("n", "<C-u>", "<Esc>viwU<Esc>", { silent = false })
-	map("n", "<Tab>", ":tabnext<cr>", { silent = false })
 	map("n", "<M-j>", ":resize +5<cr>", { silent = false })
 	map("n", "<M-k>", ":resize -5<cr>", { silent = false })
 	map("n", "<M-h>", ":vertical resize -5<cr>", { silent = false })
@@ -117,39 +117,39 @@ end
 
 M.set_hop_keymaps = function()
   local opts = { noremap = true, silent = true }
-  vim.api.nvim_set_keymap("n", "s", ":HopChar2MW<cr>", opts)
-  vim.api.nvim_set_keymap("n", "S", ":HopWordMW<cr>", opts)
-  vim.api.nvim_set_keymap(
+  map("n", "s", ":HopChar2MW<cr>", opts)
+  map("n", "S", ":HopWordMW<cr>", opts)
+  map(
     "n",
     "f",
     "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
     {}
   )
-  vim.api.nvim_set_keymap(
+  map(
     "n",
     "F",
     "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>",
     {}
   )
-  vim.api.nvim_set_keymap(
+  map(
     "o",
     "f",
     "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>",
     {}
   )
-  vim.api.nvim_set_keymap(
+  map(
     "o",
     "F",
     "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>",
     {}
   )
-  vim.api.nvim_set_keymap(
+  map(
     "",
     "t",
     "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>",
     {}
   )
-  vim.api.nvim_set_keymap(
+  map(
     "",
     "T",
     "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = -1 })<cr>",
@@ -160,6 +160,10 @@ end
 M.set_easyalign_keymaps = function()
   map("x", "ga", "<Plug>(EasyAlign)", { silent = false} )
   map("n", "ga", "<Plug>(EasyAlign)", { silent = false} )
+end
+
+M.set_telescope_find_picker_keymaps = function()
+  map("n", "<leader>.", "<CMD>Telescope find_pickers<CR>")
 end
 
 M.config = function()

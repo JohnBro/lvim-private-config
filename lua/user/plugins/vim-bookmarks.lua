@@ -11,8 +11,8 @@ end
 M.config = function()
 	vim.cmd([[hi link BookmarkSign TodoSignTODO]])
 	vim.cmd([[hi link BookmarkAnnotationSign TodoSignTODO]])
-	vim.api.nvim_set_keymap("n", "mm", "<CMD>BookmarkToggle<CR>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "mM", "<CMD>BookmarkAnnotate<CR>", { noremap = true })
+	vim.api.nvim_set_keymap("n", "Mm", "<CMD>BookmarkToggle<CR>", { noremap = true })
+	vim.api.nvim_set_keymap("n", "MM", "<CMD>BookmarkAnnotate<CR>", { noremap = true })
 end
 
 return M
