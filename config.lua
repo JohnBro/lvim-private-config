@@ -4,15 +4,13 @@ lvim.leader = "space"
 lvim.colorscheme = "lunar" -- set to a custom theme
 lvim.builtin.time_based_themes = true -- set false to use your own configured theme
 lvim.transparent_window = false -- enable/disable transparency
-lvim.builtin.alpha.active = true
-lvim.builtin.alpha.mode = "dashboard"
 lvim.debug = false
--- vim.lsp.set_log_level "error"
+vim.lsp.set_log_level "error"
 lvim.log.level = "warn"
--- lvim.builtin.bufferline.options.always_show_bufferline = true
 
 -- general
 lvim.format_on_save.enabled = false
+lvim.builtin.alpha.active = true
 lvim.builtin.smooth_scroll = "neoscroll" -- for smoth scrolling, can be "cinnamon", "neoscroll" or ""
 lvim.builtin.tabnine = { active = true } -- change to false if you don't like tabnine
 lvim.builtin.persistence = { active = true } -- change to false if you don't want persistence
@@ -43,9 +41,6 @@ else
 end
 
 require("user.neovim").config()
-
--- Override Lunarvim defaults
--- =========================================
 require("user.builtin").config()
 require("user.statusline").config()
 require("user.autocommands").config()

@@ -4,6 +4,13 @@ local UserIcons = require("user.icons")
 
 M.config = function()
   -------------------------
+  -- Bufferline
+  -------------------------
+  if lvim.builtin.bufferline.active then
+    local bufferline = lvim.builtin.bufferline
+    bufferline.options.always_show_bufferline = true
+  end
+  -------------------------
   -- CMP
   -------------------------
   lvim.builtin.cmp.sources = {
