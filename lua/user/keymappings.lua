@@ -94,6 +94,9 @@ local function whichkey_mappings()
   which_key.mappings["LC"] = { "<CMD>Telescope commands<CR>", "Commands" }
 	which_key.mappings["P"] = { "<CMD>Telescope projects<CR>", "Projects" }
 	which_key.mappings["o"] = { "<CMD>SymbolsOutline<CR>", "Outline" }
+  which_key.mappings["x"] = {
+    name = "+Text",
+  }
 end
 
 local function plugins_mappings()

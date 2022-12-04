@@ -238,6 +238,15 @@ M.config = function()
 			"sindrets/diffview.nvim",
 			event = "BufRead",
 		},
+    ----------------------------
+    --- Function Enhancement ---
+    ----------------------------
+    {
+      "epwalsh/obsidian.nvim",
+      tag = "v1.6.1",
+      cmd = { "Obsidian*" },
+      config = function() require("user.plugins.obsidian").config() end,
+    },
 	}
 end
 

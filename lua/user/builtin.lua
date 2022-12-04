@@ -79,26 +79,30 @@ M.config = function()
   -----------------------
   -- Treesitter
   -----------------------
+  local treesitter = lvim.builtin.treesitter
   local languages = vim.tbl_flatten {
     { "bash", "c", "make", "cmake", "comment", "cpp", "css", "glsl" },
     { "help", "html", "java", "javascript", "jsdoc", "typescript" },
     { "json", "jsonc", "kotlin", "latex" },
-    { "markdown", "perl", "php", "python", "lua" },
+    { "markdown", "markdown_inline", "perl", "php", "python", "lua" },
     { "vim", "vue", "yaml", "toml", "regex" },
   }
-  lvim.builtin.treesitter.ensure_installed = languages
-  lvim.builtin.treesitter.matchup.enable = true
-  lvim.builtin.treesitter.ignore_install = { "haskell" }
-  lvim.builtin.treesitter.autotag.enable = true
-  lvim.builtin.treesitter.rainbow.enable = true
-  lvim.builtin.treesitter.highlight.enable = true
-  lvim.builtin.treesitter.incremental_selection = {
+  treesitter.ensure_installed = languages
+  treesitter.matchup.enable = true
+  treesitter.ignore_install = { "haskell" }
+  treesitter.autotag.enable = true
+  treesitter.rainbow.enable = true
+  treesitter.highlight.enable = true
+  treesitter.highlight.additional_vim_regex_highlighting = {
+    "markdown",
+  }
+  treesitter.incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "<C-n>",
-      node_incremental = "<C-n>",
+      init_selection = "<leader>xv",
+      node_incremental = "v",
       scope_incremental = "<TAB>",
-      node_decremental = "<C-r>",
+      node_decremental = "V",
     },
   }
 end
