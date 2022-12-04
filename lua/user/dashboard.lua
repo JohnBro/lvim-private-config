@@ -57,6 +57,7 @@ local buttons = {
   opts = {
     hl_shortcut = "Include",
     spacing = 0,
+    width = 45,
   },
   entries = {
     { "f", LvimIcons.ui.FindFile .. "  Find File", "<CMD>Telescope find_files<CR>" },
