@@ -47,11 +47,7 @@ require("user.neovim").config()
 -- Override Lunarvim defaults
 -- =========================================
 require("user.builtin").config()
-
--- require("user.alpha").config()
 require("user.statusline").config()
 require("user.autocommands").config()
-require("user.treesitter").config()
-require("user.lsp").config()
 require("user.plugins").config()
 require("user.keymappings").config()
