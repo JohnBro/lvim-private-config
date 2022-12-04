@@ -83,7 +83,6 @@ local function whichkey_mappings()
 	}
 	which_key.mappings["bf"] = {}
 	which_key.mappings["c"] = {}
-	which_key.mappings["e"] = {}
 	which_key.mappings["f"] = {
 		name = "+Find",
 		f = { "<cmd>Telescope find_files<cr>", "Find Files"},
@@ -91,7 +90,7 @@ local function whichkey_mappings()
 		r = { "<cmd>Telescope oldfiles<cr>", "History files" },
 
 	}
-	which_key.mappings["h"] = {}
+	-- which_key.mappings["h"] = {}
   which_key.mappings["LC"] = { "<CMD>Telescope commands<CR>", "Commands" }
 	which_key.mappings["P"] = { "<CMD>Telescope projects<CR>", "Projects" }
 	which_key.mappings["o"] = { "<CMD>SymbolsOutline<CR>", "Outline" }
