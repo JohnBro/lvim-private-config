@@ -71,16 +71,16 @@ M.config = function()
   }
   lvim.lsp.diagnostics.signs.values = {
     { name = "DiagnosticSignError", text = UserIcons.misc.error },
-    { name = "DiagnosticSignWarn", text = UserIcons.misc.warn },
-    { name = "DiagnosticSignInfo", text = UserIcons.misc.info },
-    { name = "DiagnosticSignHint", text = UserIcons.misc.hint },
+    { name = "DiagnosticSignWarn", text  = UserIcons.misc.warn },
+    { name = "DiagnosticSignInfo", text  = UserIcons.misc.info },
+    { name = "DiagnosticSignHint", text  = UserIcons.misc.hint },
   }
 
   -----------------------
   -- Treesitter
   -----------------------
   local treesitter = lvim.builtin.treesitter
-  local languages = vim.tbl_flatten {
+  local languages  = vim.tbl_flatten {
     { "bash", "c", "make", "cmake", "comment", "cpp", "css", "glsl" },
     { "help", "html", "java", "javascript", "jsdoc", "typescript" },
     { "json", "jsonc", "kotlin", "latex" },
@@ -88,23 +88,43 @@ M.config = function()
     { "vim", "vue", "yaml", "toml", "regex" },
   }
   treesitter.ensure_installed = languages
-  treesitter.matchup.enable = true
-  treesitter.ignore_install = { "haskell" }
-  treesitter.autotag.enable = true
-  treesitter.rainbow.enable = true
+  treesitter.matchup.enable   = true
+  treesitter.ignore_install   = { "haskell" }
+  treesitter.autotag.enable   = true
+  treesitter.rainbow.enable   = true
   treesitter.highlight.enable = true
   treesitter.highlight.additional_vim_regex_highlighting = {
     "markdown",
   }
   treesitter.incremental_selection = {
-    enable = true,
+    enable  = true,
     keymaps = {
-      init_selection = "<leader>xv",
-      node_incremental = "v",
+      init_selection    = "<leader>xv",
+      node_incremental  = "v",
       scope_incremental = "<TAB>",
-      node_decremental = "V",
+      node_decremental  = "V",
     },
   }
+
+  ---------------
+  -- Nvimtree
+  ---------------
+  local nvimtree = lvim.builtin.nvimtree
+  nvimtree.setup.diagnostics = {
+    enable = true,
+    icons  = {
+      hint    = UserIcons.misc.hint,
+      info    = UserIcons.misc.info,
+      warning = UserIcons.misc.warn,
+      error   = UserIcons.misc.error,
+    }
+  }
+
+  --------------
+  -- Project
+  --------------
+  lvim.builtin.project.active            = true
+  lvim.builtin.project.detection_methods = { "lsp", "pattern" }
 end
 
 M.show_documentation = function()
