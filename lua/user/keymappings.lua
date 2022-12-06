@@ -68,6 +68,7 @@ end
 
 local function whichkey_mappings()
   local which_key = lvim.builtin.which_key
+  which_key.mappings["/"] = {}
   which_key.mappings["b"] = {
     name = "Buffers",
     b = { "<CMD>Telescope buffers<cr>", "Buffers" },
