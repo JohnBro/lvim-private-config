@@ -231,14 +231,14 @@ M.config = function()
       event          = { "InsertEnter", "CursorHoldI" },
       disable        = lvim.builtin.winbar_provider ~= "treesitter",
     },
-		---------
-		-- Git --
-		---------
+		-----------
+		--- Git ---
+		-----------
 		{
 			"sindrets/diffview.nvim",
-			event = "BufRead",
-		},
-	}
+      event = "BufRead",
+    },
+  }
 end
 
 return M

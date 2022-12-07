@@ -83,7 +83,7 @@ M.config = function()
   local languages  = vim.tbl_flatten {
     { "bash", "c", "make", "cmake", "comment", "cpp", "css", "glsl" },
     { "help", "html", "java", "javascript", "jsdoc", "typescript" },
-    { "json", "jsonc", "kotlin", "latex" },
+    { "json", "jsonc", "kotlin", "latex", "org" },
     { "markdown", "markdown_inline", "perl", "php", "python", "lua" },
     { "vim", "vue", "yaml", "toml", "regex" },
   }
@@ -95,6 +95,7 @@ M.config = function()
   treesitter.highlight.enable = true
   treesitter.highlight.additional_vim_regex_highlighting = {
     "markdown",
+    "org",
   }
   treesitter.incremental_selection = {
     enable  = true,
@@ -119,12 +120,40 @@ M.config = function()
       error   = UserIcons.misc.error,
     }
   }
+  if (vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1) then
+    -- nvim-tree has some performance issues on windows, see kyazdani42/nvim-tree.lua#549
+    lvim.builtin.nvimtree.setup.diagnostics.enable = nil
+    lvim.builtin.nvimtree.setup.filters.custom = nil
+    lvim.builtin.nvimtree.setup.git.enable = nil
+    lvim.builtin.nvimtree.setup.update_cwd = nil
+    lvim.builtin.nvimtree.setup.update_focused_file.update_cwd = nil
+    lvim.builtin.nvimtree.setup.view.side = "left"
+    lvim.builtin.nvimtree.setup.renderer.highlight_git = nil
+    lvim.builtin.nvimtree.setup.renderer.icons.show.git = nil
+  else
+    lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
+  end
+
 
   --------------
   -- Project
   --------------
   lvim.builtin.project.active            = true
   lvim.builtin.project.detection_methods = { "lsp", "pattern" }
+
+  -----------------------
+  -- Terminal
+  -----------------------
+  if (vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1) then
+    lvim.builtin.terminal.shell = "pwsh.exe -NoLogo"
+    lvim.builtin.terminal.open_mapping = "<C-Space>" -- <C-`>
+  elseif (vim.fn.has("macunix")) == 1 then
+    lvim.builtin.terminal.open_mapping = "<C-`>" -- <C-`>
+    lvim.builtin.terminal.shell = "/bin/zsh"
+  else
+    lvim.builtin.terminal.open_mapping = "<C-Space>" -- <C-`>
+    lvim.builtin.terminal.shell = "/bin/bash"
+  end
 end
 
 M.show_documentation = function()

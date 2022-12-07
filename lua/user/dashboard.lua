@@ -3,7 +3,6 @@ M = {}
 local Banners        = require("user.banners")
 local LvimIcons      = require("lvim.icons")
 local UserIcons      = require("user.icons")
-local AlphaDashboard = require("alpha.themes.dashboard")
 local text           = require "lvim.interface.text"
 local lvim_version   = require("lvim.utils.git").get_lvim_version()
 
@@ -13,19 +12,22 @@ local function resolve_buttons(button_section)
   end
 
   local val = {}
-  for _, entry in pairs(button_section.entries) do
-    local on_press = function()
-      local sc_ = entry[1]:gsub("%s", ""):gsub("SPC", "<leader>")
-      local key = vim.api.nvim_replace_termcodes(sc_, true, false, true)
-      vim.api.nvim_feedkeys(key, "normal", false)
+  local status_ok, AlphaDashboard = pcall(require, "alpha.themes.dashboard")
+  if status_ok then
+    for _, entry in pairs(button_section.entries) do
+      local on_press = function()
+        local sc_ = entry[1]:gsub("%s", ""):gsub("SPC", "<leader>")
+        local key = vim.api.nvim_replace_termcodes(sc_, true, false, true)
+        vim.api.nvim_feedkeys(key, "normal", false)
+      end
+      local button_element = AlphaDashboard.button(entry[1], entry[2], entry[3])
+      -- this became necessary after recent changes in alpha.nvim (06ade3a20ca9e79a7038b98d05a23d7b6c016174)
+      button_element.on_press = on_press
+
+      button_element.opts = vim.tbl_extend("force", button_element.opts, entry[4] or button_section.opts or {})
+
+      table.insert(val, button_element)
     end
-    local button_element = AlphaDashboard.button(entry[1], entry[2], entry[3])
-    -- this became necessary after recent changes in alpha.nvim (06ade3a20ca9e79a7038b98d05a23d7b6c016174)
-    button_element.on_press = on_press
-
-    button_element.opts = vim.tbl_extend("force", button_element.opts, entry[4] or button_section.opts or {})
-
-    table.insert(val, button_element)
   end
   return val
 end
