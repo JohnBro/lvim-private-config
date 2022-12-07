@@ -1,4 +1,5 @@
 local M = {}
+local which_key = lvim.builtin.which_key
 
 local function map(mode, lhs, rhs, opts)
 	local options = { noremap = true, silent = true }
@@ -67,7 +68,6 @@ local function basic_mappings()
 end
 
 local function whichkey_mappings()
-  local which_key = lvim.builtin.which_key
   which_key.mappings["/"] = {}
   which_key.mappings["b"] = {
     name = "Buffers",
@@ -161,12 +161,19 @@ M.set_hop_keymaps = function()
 end
 
 M.set_easyalign_keymaps = function()
-  map("x", "ga", "<Plug>(EasyAlign)", { silent = false} )
-  map("n", "ga", "<Plug>(EasyAlign)", { silent = false} )
+  map("x", "ga", "<Plug>(EasyAlign)", { silent = false } )
+  map("n", "ga", "<Plug>(EasyAlign)", { silent = false } )
 end
 
 M.set_telescope_find_picker_keymaps = function()
   map("n", "<leader>.", "<CMD>Telescope find_pickers<CR>")
+end
+
+M.set_spectre_keymaps = function()
+  map("n", "<leader>ss", "<CMD>lua require('spectre').open()<CR>", { silent = false } )
+  map("v", "<leader>s", "<Esc>:lua require('spectre').open_visual()<CR>", { silent = false } )
+  map("n", "<leader>sw", "<CMD>lua require('spectre').open_visual({select_word=true})<CR>", { silent = false } )
+  map("n", "<leader>sx", "viw:lua require('spectre').open_file_search()<CR>", { silent = false } )
 end
 
 M.config = function()

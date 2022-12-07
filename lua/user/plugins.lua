@@ -238,6 +238,13 @@ M.config = function()
 			"sindrets/diffview.nvim",
       event = "BufRead",
     },
+    {
+      "windwp/nvim-spectre",
+      event = "BufRead",
+      cmd = "Spectre",
+      key = { "<leader>ss", "<leader>sw", "<leader>sx", { "v", "<leader>s" } },
+      config = function() require("user.plugins.spectre").config() end,
+    },
   }
 end
 
