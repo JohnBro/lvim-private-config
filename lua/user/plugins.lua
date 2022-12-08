@@ -54,8 +54,8 @@ M.config = function()
 		--------------------
     {
       "chentoast/marks.nvim",
-      event = "BufRead",
-      setup = function() require("user.plugins.marks").config() end,
+      event  = "BufRead",
+      config = function() require("user.plugins.marks").config() end,
     },
 		{
 			"ethanholz/nvim-lastplace",
@@ -239,7 +239,7 @@ M.config = function()
       event = "BufRead",
     },
     {
-      "windwp/nvim-spectre",
+      "nvim-pack/nvim-spectre",
       event = "BufRead",
       cmd = "Spectre",
       key = { "<leader>ss", "<leader>sw", "<leader>sx", { "v", "<leader>s" } },

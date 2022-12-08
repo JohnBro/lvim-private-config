@@ -139,7 +139,7 @@ M.config = function()
   -- Project
   --------------
   lvim.builtin.project.active            = true
-  lvim.builtin.project.detection_methods = { "lsp", "pattern" }
+  lvim.builtin.project.detection_methods = { "lsp" }
 
   -----------------------
   -- Terminal
