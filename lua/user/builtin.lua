@@ -3,16 +3,24 @@ local M = {}
 local UserIcons = require("user.icons")
 
 M.config = function()
-  -------------------------
-  -- Bufferline
-  -------------------------
+  ---------------
+  --- which_key
+  ---------------
+  which_key                         = lvim.builtin.which_key
+  which_key.setup.plugins.registers = true
+  which_key.setup.plugins.marks     = true
+
+  ------------------
+  --- Bufferline ---
+  ------------------
   if lvim.builtin.bufferline.active then
-    local bufferline = lvim.builtin.bufferline
+    local bufferline                          = lvim.builtin.bufferline
     bufferline.options.always_show_bufferline = true
   end
-  -------------------------
-  -- CMP
-  -------------------------
+
+  -----------
+  --- CMP ---
+  -----------
   lvim.builtin.cmp.sources = {
     { name = "nvim_lsp" },
     { name = "cmp_tabnine", max_item_count = 3 },
@@ -28,16 +36,16 @@ M.config = function()
     { name = "orgmode" },
   }
 
-  -------------------------
-  -- Dashboard
-  -------------------------
+  -----------------
+  --- Dashboard ---
+  -----------------
   lvim.builtin.alpha.mode = "custom"
   local alpha_opts = require("user.dashboard").config()
   lvim.builtin.alpha["custom"] = { config = alpha_opts }
 
-  -----------------------
-  -- LSP
-  -----------------------
+  -----------
+  --- LSP ---
+  -----------
   lvim.lsp.installer.setup.ensure_installed = {}
   --- WARN: configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
   --- see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
@@ -107,9 +115,9 @@ M.config = function()
     },
   }
 
-  ---------------
-  -- Nvimtree
-  ---------------
+  ----------------
+  --- Nvimtree ---
+  ----------------
   local nvimtree = lvim.builtin.nvimtree
   nvimtree.setup.diagnostics = {
     enable = true,
@@ -135,15 +143,15 @@ M.config = function()
   end
 
 
-  --------------
-  -- Project
-  --------------
+  ---------------
+  --- Project ---
+  ---------------
   lvim.builtin.project.active            = true
   lvim.builtin.project.detection_methods = { "lsp" }
 
-  -----------------------
-  -- Terminal
-  -----------------------
+  ----------------
+  --- Terminal ---
+  ----------------
   if (vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1) then
     lvim.builtin.terminal.shell = "pwsh.exe -NoLogo"
     lvim.builtin.terminal.open_mapping = "<C-Space>" -- <C-`>

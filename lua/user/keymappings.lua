@@ -29,14 +29,6 @@ local function basic_mappings()
 	map("n", "G", "Gzz")
 	map("n", "{", "{zz")
 	map("n", "}", "}zz")
-	map("i", "<C-h>", "<C-w>h")
-	map("i", "<C-l>", "<C-w>l")
-	map("i", "<C-j>", "<C-w>j")
-	map("i", "<C-k>", "<C-w>k")
-	map("n", "<C-h>", "<C-w>h")
-	map("n", "<C-j>", "<C-w>j")
-	map("n", "<C-k>", "<C-w>k")
-	map("n", "<C-l>", "<C-w>l")
 
 	------------------
 	-- Copy & Paste --
