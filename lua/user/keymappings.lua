@@ -75,15 +75,41 @@ local function whichkey_mappings()
     L = { "<cmd>BufferLineSortByExtension<cr>", "Sort by language", },
 	}
 	which_key.mappings["bf"] = {}
-	which_key.mappings["c"] = {}
+  which_key.mappings["c"] = {
+    name = "Code",
+    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+    d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
+    w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
+    f = { require("lvim.lsp.utils").format, "Format" },
+    i = { "<cmd>LspInfo<cr>", "Lsp Info" },
+    I = { "<cmd>Mason<cr>", "Mason Info" },
+    j = {
+      vim.diagnostic.goto_next,
+      "Next Diagnostic",
+    },
+    k = {
+      vim.diagnostic.goto_prev,
+      "Prev Diagnostic",
+    },
+    l = { vim.lsp.codelens.run, "CodeLens Action" },
+    q = { vim.diagnostic.setloclist, "Quickfix" },
+    r = { vim.lsp.buf.rename, "Rename" },
+    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+    S = {
+      "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+      "Workspace Symbols",
+    },
+    e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
+  }
 	which_key.mappings["f"] = {
-		name = "+Find",
+		name = "Find",
 		f = { "<cmd>Telescope find_files<cr>", "Find Files"},
 		h = { "<cmd>Telescope help_tags<cr>", "Vim Tags" },
 		r = { "<cmd>Telescope oldfiles<cr>", "History files" },
 
 	}
-	-- which_key.mappings["h"] = {}
+	which_key.mappings["h"] = {}
+  which_key.mappings["l"] = {}
   which_key.mappings["LC"] = { "<CMD>Telescope commands<CR>", "Commands" }
 	which_key.mappings["P"] = { "<CMD>Telescope projects<CR>", "Projects" }
 	which_key.mappings["o"] = { "<CMD>SymbolsOutline<CR>", "Outline" }
