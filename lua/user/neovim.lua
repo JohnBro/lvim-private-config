@@ -34,7 +34,7 @@ M.config = function()
 		let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 		set shellquote= shellxquote=
 		]]
-		vim.opt.guifont = "FiraCode NF:h13" -- the font used in graphical neovim applications
+		vim.opt.guifont = "FiraCode Nerd Font Mono:h13" -- the font used in graphical neovim applications
 		-- Set a compatible clipboard manager
 		vim.g.clipboard = {
       name = "win32-yank",
@@ -61,7 +61,7 @@ M.config = function()
 			cache_enabled = 0,
 		}
 	else
-			vim.opt.guifont = "NerdCodePro Font:h13"
+			vim.opt.guifont = "FiraCode Nerd Font Mono:h13"
 	end
 
   vim.opt.autowriteall = true -- automatically :write before running commands and changing files
