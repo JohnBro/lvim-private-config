@@ -21,7 +21,6 @@ lvim.builtin.motion_provider = "hop" -- change this to use different motion prov
 lvim.builtin.winbar_provider = "filename" -- can be "filename" or "treesitter" or "navic" or ""
 lvim.builtin.nonumber_unfocus = false -- diffrentiate between focused and non focused windows
 lvim.builtin.cursorword = { active = true } -- use a bit fancier cursorword
-lvim.builtin.tabnine = { active = false }
 
 require("user.neovim").config()
 require("user.builtin").config()
