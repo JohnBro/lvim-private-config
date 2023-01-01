@@ -188,10 +188,10 @@ M.set_telescope_find_picker_keymaps = function()
 end
 
 M.set_spectre_keymaps = function()
-  map("n", "<leader>ss", "<CMD>lua require('spectre').open()<CR>", { silent = false } )
+  map("n", "<leader>ss", "viw:lua require('spectre').open_file_search()<CR>", { silent = false } )
+  map("n", "<leader>sx", "<CMD>lua require('spectre').open()<CR>", { silent = false } )
   map("v", "<leader>s", "<Esc>:lua require('spectre').open_visual()<CR>", { silent = false } )
   map("n", "<leader>sw", "<CMD>lua require('spectre').open_visual({select_word=true})<CR>", { silent = false } )
-  map("n", "<leader>sx", "viw:lua require('spectre').open_file_search()<CR>", { silent = false } )
 end
 
 M.config = function()

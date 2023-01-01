@@ -49,7 +49,7 @@ M.config = function()
   lvim.lsp.installer.setup.ensure_installed = {}
   --- WARN: configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
   --- see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
-  vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
+  vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jedi_language_server" })
   lvim.lsp.diagnostics.virtual_text = false -- remove this line if you want to see inline errors
   lvim.lsp.installer.setup.automatic_installation = false -- set as true if you want to auto install
   lvim.lsp.buffer_mappings.normal_mode["K"] = {
