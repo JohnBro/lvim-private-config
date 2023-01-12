@@ -20,8 +20,8 @@ lvim.builtin.dap.active = false -- change this to enable/disable debugging
 lvim.builtin.motion_provider = "hop" -- change this to use different motion providers ( clever or hop or leap )
 lvim.builtin.winbar_provider = "filename" -- can be "filename" or "treesitter" or "navic" or ""
 lvim.builtin.nonumber_unfocus = false -- diffrentiate between focused and non focused windows
-lvim.builtin.cursorword = { active = true } -- use a bit fancier cursorword
 lvim.builtin.neogit = { active = false } -- use neogit(magit) for git
+lvim.builtin.illuminate.active = true -- highlight word under the cursor using either LSP, Tree-sitter, or regex matching
 
 require("user.neovim").config()
 require("user.builtin").config()

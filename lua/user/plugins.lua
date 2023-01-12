@@ -187,12 +187,6 @@ M.config = function()
 			config = function() require("user.plugins.todo-comments").config() end,
 		},
 		{
-			"itchyny/vim-cursorword",
-			event   = {"BufEnter", "BufNewFile"},
-			config  = function() require("user.plugins.vim-cursorword").config() end,
-      disable = not lvim.builtin.cursorword.active,
-		},
-		{
 			"tpope/vim-surround",
 			keys = { "c", "d", "y" },
 			-- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
