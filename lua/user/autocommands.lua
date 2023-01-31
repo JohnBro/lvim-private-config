@@ -10,7 +10,7 @@ M.config = function()
     {
       group = "_lvim_user",
       pattern = "*",
-      command = "setlocal cursorline cursorcolumn"
+      command = "setlocal cursorline"
     }
   )
   create_aucmd(
@@ -18,7 +18,7 @@ M.config = function()
     {
       group = "_lvim_user",
       pattern = "*",
-      command = "setlocal nocursorline nocursorcolumn"
+      command = "setlocal nocursorline"
     }
   )
   if lvim.builtin.nonumber_unfocus then
